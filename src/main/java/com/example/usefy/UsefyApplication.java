@@ -8,7 +8,5 @@ public class UsefyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UsefyApplication.class, args);
-        System.out.println("Running on localhost");
-	}
-
+    }
 }
