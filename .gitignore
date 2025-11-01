@@ -6,9 +6,6 @@ target/
 
 ### Project ###
 .DS_Store
-.gitattributes
-mvnw.cmd
-mvnw
 
 ### STS ###
 .apt_generated
