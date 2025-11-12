@@ -1,5 +1,6 @@
 package com.example.usefy.model;
 
+import com.example.usefy.config.SecurityConfig;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false)
     private String password;
 
     //Setter
