@@ -1,6 +1,5 @@
 package com.example.usefy.model;
 
-import com.example.usefy.config.SecurityConfig;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
