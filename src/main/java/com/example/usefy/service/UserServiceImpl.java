@@ -7,23 +7,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final PasswordEncoder encoder;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserServiceImpl(PasswordEncoder encoder, UserRepository userRepository) {
-        this.encoder = encoder;
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
 
     @Override
     public void registerUser(User user) {
-        String encodedPassword = encoder.encode(user.getPassword());
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username).
                 orElseThrow( () -> new RuntimeException("No user found"));
     }
