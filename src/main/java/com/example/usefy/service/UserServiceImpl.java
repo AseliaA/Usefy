@@ -16,14 +16,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(User newUser) {
-        String encodedPassword = encoder.encode(newUser.getPassword());
-        newUser.setPassword(encodedPassword);
-        userRepository.save(newUser);
+    public void registerUser(User user) {
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
     }
 
     @Override
     public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow( () -> new RuntimeException("No user found"));
+        return userRepository.findByUsername(username).
+                orElseThrow( () -> new RuntimeException("No user found"));
     }
 }
