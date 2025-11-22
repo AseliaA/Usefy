@@ -1,48 +1,47 @@
 package com.example.usefy.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue
+    private UUID id;  // Primary key is now UUID
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(nullable = false)
-    private String password;
+    @Column(nullable = false, length = 255)
+    private String passwordHash;
 
-    //Setter
-    public void setId(Long id) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String username, String passwordHash) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+    }
+
+    // Getters and setters
+    public UUID getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    //TODO: Implement password hashing using BCryptPasswordEncoder
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    //Getter
-    public Long getId() {
-        return this.id;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public String getPassword() {
-        return this.password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
