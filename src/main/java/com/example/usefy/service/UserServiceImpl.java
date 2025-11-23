@@ -1,5 +1,6 @@
 package com.example.usefy.service;
 
+import com.example.usefy.dto.UserRegistrationDto;
 import com.example.usefy.model.User;
 import com.example.usefy.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,16 +19,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isEmpty()) {
-            throw new IllegalArgumentException("Username already exists");
-        } else {
-            User newUser = new User();
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
-            newUser.setUsername(user.getUsername());
-            newUser.setPassword(encodedPassword);
-            return userRepository.save(newUser);
+    public User registerUser(UserRegistrationDto userRegistrationDto) {
+        if (userRepository.findByUsername(userRegistrationDto.getUsername()) != null) {
+            throw new IllegalArgumentException("Username already exists.");
         }
+        String hashedPassword = passwordEncoder.encode(userRegistrationDto.getPassword());
+        User user = new User(userRegistrationDto.getUsername(), hashedPassword);
+        return userRepository.save(user);
     }
 
     @Override
